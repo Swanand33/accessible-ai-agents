@@ -1,0 +1,60 @@
+# Environment variables
+.env
+
+# Virtual environments
+agent-env/
+venv/
+env/
+ENV/
+
+# Python
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Logs
+*.log
+logs/
+accessible_ai.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temp files
+*.tmp
+*.bak
+.cache/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Internal planning files (DO NOT PUSH)
+DAY-1-CHECKLIST.md
+GITHUB-SETUP-GUIDE.md
+NEXT_STEPS.md
+PROGRESS-LOG.md
+PROJECT-MASTER-TRACKER.md
+RESUME-INSTRUCTIONS.md
+SESSION-RESUME-NOTES.md
+START-HERE.md
+STATUS_ANALYSIS.md
+MASTER-STRATEGY.txt
