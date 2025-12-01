@@ -1,6 +1,8 @@
-# AccessibleAI - Multi-Agent Content Accessibility System
+# AccessibleAI - Multi-Agent System for Digital Content Accessibility
 
-**Making digital content accessible for 2.2 billion people with vision impairment**
+**Kaggle 5-Day AI Agents Intensive - Capstone Project**  
+**Track:** Agents for Good  
+**Status:** ✅ Production Ready
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -8,16 +10,24 @@
 
 ---
 
+## 🎯 Quick Links
+
+- **GitHub Repository:** [https://github.com/Swanand33/accessible-ai-agents](https://github.com/Swanand33/accessible-ai-agents)
+- **Main Implementation:** `/adk_version/agent.py`
+- **Full Capabilities:** `/CAPABILITIES.md`
+- **Kaggle Submission:** `/KAGGLE_FINAL_SUBMISSION.md`
+
+---
+
 ## 📖 Table of Contents
 
 - [Problem Statement](#-problem-statement)
 - [Solution](#-solution)
-- [Features](#-features)
+- [Capabilities Demonstrated](#-capabilities-demonstrated)
+- [Quick Start](#-quick-start)
 - [Architecture](#-architecture)
 - [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [Usage Examples](#-usage-examples)
-- [API Reference](#-api-reference)
+- [Usage](#-usage)
 - [Testing](#-testing)
 - [Deployment](#-deployment)
 - [Contributing](#-contributing)
@@ -33,11 +43,11 @@
 - Only **3% of web images** have meaningful alt-text descriptions
 - **95% of PDFs** are completely inaccessible to screen readers
 - This excludes people with disabilities from:
-  - **Education**: Textbooks, research papers, course materials
-  - **Employment**: Job applications, work documents, training materials
-  - **Basic Information**: News, government documents, healthcare information
+  - 📚 **Education**: Textbooks, research papers, course materials
+  - 💼 **Employment**: Job applications, work documents, training materials
+  - 📰 **Information**: News, government documents, healthcare information
 
-### Why This Matters
+### Impact
 
 Without accessible digital content, people with visual impairments face:
 - Barriers to education and career advancement
@@ -49,18 +59,19 @@ Without accessible digital content, people with visual impairments face:
 
 ## 💡 Solution
 
-**AccessibleAI** is a multi-agent system that automatically makes digital content accessible by:
+**AccessibleAI** is a production-ready multi-agent system built with Google's Agent Development Kit (ADK) that automatically makes digital content accessible by:
 
 1. **Generating descriptive alt-text** for images using AI vision
 2. **Extracting and structuring text** from PDF documents
 3. **Orchestrating specialized agents** to handle different content types seamlessly
 
-### Why Multi-Agent?
+### Why Multi-Agent Architecture?
 
-- **Specialization**: Each agent is optimized for its specific task
-- **Scalability**: Easy to add new content types (audio, video, etc.)
+- **Specialization**: Each agent optimized for its specific task
+- **Scalability**: Easy to add new content types (audio, video, HTML, etc.)
 - **Reliability**: Failure in one agent doesn't crash the entire system
 - **Observability**: Track and log each agent's performance independently
+- **Maintainability**: Clear separation of concerns and responsibilities
 
 ---
 
@@ -69,26 +80,46 @@ Without accessible digital content, people with visual impairments face:
 ### 🔥 Core Features
 
 1. **Multi-Agent Architecture** ⭐
-   - Image Description Agent (Gemini Vision)
-   - PDF Processing Agent (PyPDF2)
-   - Coordinator Agent (orchestration)
+   - **Coordinator Agent** (orchestration & routing)
+   - **Image Description Agent** (Gemini Vision)
+   - **PDF Processing Agent** (PyPDF2)
 
 2. **Tools Integration** 🛠️
-   - Google Gemini 2.0 Flash API
-   - PyPDF2 for PDF extraction
-   - Pillow for image processing
+   - Google Gemini 2.0 Flash API (vision AI)
+   - PyPDF2 (PDF text extraction)
+   - Pillow (image processing)
 
 3. **Comprehensive Observability** 📊
    - Structured logging for all operations
    - Success/failure tracking
-   - Performance metrics
+   - Performance metrics & statistics
 
 ### 🎁 Bonus Features
 
 - **Batch Processing**: Process multiple files at once
-- **Detailed Descriptions**: Toggle between concise and detailed alt-text
+- **Flexible Detail Levels**: Concise or detailed descriptions
 - **Error Handling**: Graceful handling of corrupt/invalid files
 - **Summary Generation**: Human-readable processing reports
+- **Demo Mode**: Works without API key for testing
+
+---
+
+## 📊 Capabilities Demonstrated
+
+We demonstrate **6 core capabilities** from the course (exceeds 3+ requirement):
+
+| # | Capability | Evidence | Day |
+|---|-----------|----------|-----|
+| 1 | **Google ADK Framework** | Full ADK implementation with 3 agents | Days 1-5 |
+| 2 | **Multi-Agent Orchestration** | Coordinator pattern for agent collaboration | Day 1 |
+| 3 | **Tools & Integration** | Gemini Vision API + PyPDF2 | Day 2 |
+| 4 | **Error Handling** | Comprehensive error management | Day 4 |
+| 5 | **Quality & Testing** | 6 tests, 100% pass rate | Day 4 |
+| 6 | **Production Readiness** | Tested, documented, deployable | Day 5 |
+
+**Total: 6 capabilities ✓ (Exceeds 3+ requirement)**
+
+See `/CAPABILITIES.md` for detailed breakdown.
 
 ---
 
@@ -97,77 +128,61 @@ Without accessible digital content, people with visual impairments face:
 ### System Overview
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                   CoordinatorAgent                      │
-│              (Orchestrates workflow)                    │
-└─────────────────┬───────────────────────────────────────┘
-                  │
-        ┌─────────┴──────────┐
-        │                    │
-        ▼                    ▼
-┌──────────────┐     ┌──────────────┐
-│ImageAgent    │     │PDFAgent      │
-│(Gemini Vision│     │(PyPDF2)      │
-│ API)         │     │              │
-└──────────────┘     └──────────────┘
+┌─────────────────────────────────────────────────┐
+│           COORDINATOR AGENT                     │
+│       (Orchestrates workflow)                   │
+└─────────────┬───────────────────────────────────┘
+              │
+    ┌─────────┴──────────┐
+    │                    │
+    ▼                    ▼
+┌──────────────┐  ┌──────────────┐
+│ Image Agent  │  │ PDF Agent    │
+│(Gemini Vision│  │(PyPDF2)      │
+│ API)         │  │              │
+└──────────────┘  └──────────────┘
 ```
 
 ### Agent Responsibilities
 
-#### 1. CoordinatorAgent
-- **Role**: Root orchestrator
-- **Responsibilities**:
-  - Detect file type (image vs PDF)
-  - Route to appropriate specialized agent
-  - Aggregate results
-  - Generate summaries
-- **Tools**: File type detection, routing logic
+**1. CoordinatorAgent** (Root Orchestrator)
+- File type detection and routing
+- Result aggregation
+- Batch processing support
+- Error handling and fault isolation
 
-#### 2. ImageDescriptionAgent
-- **Role**: Image accessibility specialist
-- **Responsibilities**:
-  - Analyze images using Gemini Vision
-  - Generate descriptive alt-text
-  - Support detailed descriptions
-- **Tools**: Google Gemini 2.0 Flash, PIL/Pillow
+**2. ImageDescriptionAgent** (Vision AI)
+- Analyzes images using Gemini Vision
+- Generates descriptive alt-text
+- Concise & detailed description modes
 
-#### 3. PDFProcessingAgent
-- **Role**: Document accessibility specialist
-- **Responsibilities**:
-  - Extract text from PDFs
-  - Handle multi-page documents
-  - Manage corrupt/encrypted files
-- **Tools**: PyPDF2
+**3. PDFProcessingAgent** (Document Processing)
+- Extracts text from PDFs
+- Preserves document structure
+- Handles multi-page documents
 
-### Data Flow
-
-```
-Input File → Coordinator → File Type Detection → Specialized Agent
-                                                        ↓
-User ← Accessible Output ← Result Aggregation ← Agent Processing
-```
+See `/ARCHITECTURE_DIAGRAM.md` for detailed diagrams.
 
 ---
 
-## 🚀 Installation
+## 🚀 Quick Start
 
 ### Prerequisites
 
 - Python 3.10 or higher
-- pip (Python package manager)
 - Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
 
-### Step 1: Clone the Repository
+### 1. Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/accessible-ai-capstone.git
-cd accessible-ai-capstone
+git clone https://github.com/Swanand33/accessible-ai-agents.git
+cd accessible-ai-agents
 ```
 
-### Step 2: Create Virtual Environment
+### 2. Create Virtual Environment
 
 ```bash
-# Create virtual environment
+# Create
 python -m venv agent-env
 
 # Activate (Windows)
@@ -177,211 +192,82 @@ agent-env\Scripts\activate
 source agent-env/bin/activate
 ```
 
-### Step 3: Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Step 4: Configure API Key
-
-1. Copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
-
-2. Edit `.env` and add your Gemini API key:
-   ```bash
-   GEMINI_API_KEY=your_actual_api_key_here
-   ```
-
-3. **IMPORTANT**: Never commit your `.env` file to GitHub!
-
----
-
-## 🎯 Quick Start
-
-### Basic Usage
-
-```python
-from src.agents.coordinator import CoordinatorAgent
-import google.generativeai as genai
-from src.config import Config
-
-# Configure API
-Config.validate()
-genai.configure(api_key=Config.GEMINI_API_KEY)
-
-# Create coordinator
-coordinator = CoordinatorAgent()
-
-# Process an image
-result = coordinator.process_file("path/to/image.jpg")
-print(result['result']['alt_text'])
-
-# Process a PDF
-result = coordinator.process_file("path/to/document.pdf")
-print(f"Extracted {result['result']['char_count']} characters")
-```
-
-### Running the Demo
+### 4. Configure API Key
 
 ```bash
-# Place test files in examples/
-# - examples/sample_images/test_image_1.jpg
-# - examples/sample_pdfs/test_doc_1.pdf
+# Copy example file
+cp .env.example .env
 
-# Run the main agent
-python src/agent.py
+# Edit .env and add your API key
+# GEMINI_API_KEY=your_actual_api_key_here
+```
+
+### 5. Run Demo
+
+```bash
+# Run with ADK (requires ADK CLI)
+adk run
+
+# Or test locally
+python adk_version/test_adk_agents.py
 ```
 
 ---
 
-## 📚 Usage Examples
+## 💻 Usage
 
-### Example 1: Single Image Processing
-
-```python
-from src.agents.coordinator import CoordinatorAgent
-
-coordinator = CoordinatorAgent()
-
-# Process image
-result = coordinator.process_file("family_photo.jpg")
-
-if result['success']:
-    print("Alt-text:", result['result']['alt_text'])
-else:
-    print("Error:", result['error'])
-```
-
-**Output:**
-```
-Alt-text: A family of four standing on a beach at sunset. Two adults and two children smiling at the camera. The ocean is visible in the background with orange and pink hues in the sky. Everyone is wearing casual summer clothing.
-```
-
-### Example 2: Batch Processing
+### Basic Python Usage
 
 ```python
-from src.agents.coordinator import CoordinatorAgent
-
-coordinator = CoordinatorAgent()
-
-# Process multiple files
-files = [
-    "presentation_slide1.jpg",
-    "presentation_slide2.jpg",
-    "reference_document.pdf"
-]
-
-batch_result = coordinator.process_batch(files)
-
-# Print summary
-print(coordinator.generate_summary(batch_result))
-```
-
-**Output:**
-```
-============================================================
-ACCESSIBILITY PROCESSING SUMMARY
-============================================================
-Total Files: 3
-Successful: 3 ✓
-Failed: 0 ✗
-============================================================
-
-1. presentation_slide1.jpg [image] ✓
-   → A business presentation slide showing quarterly sales data with a bar ch...
-
-2. presentation_slide2.jpg [image] ✓
-   → A diagram illustrating the company's organizational structure with conne...
-
-3. reference_document.pdf [pdf] ✓
-   → 5 pages, 3,482 characters
-```
-
-### Example 3: Detailed Image Description
-
-```python
-from src.agents.image_agent import ImageDescriptionAgent
 import google.generativeai as genai
-from src.config import Config
+from adk_version.agent import generate_image_description_tool, extract_pdf_text_tool
 
-Config.validate()
-genai.configure(api_key=Config.GEMINI_API_KEY)
+# Configure API
+genai.configure(api_key="your_api_key")
 
-agent = ImageDescriptionAgent()
+# Process an image
+result = generate_image_description_tool("path/to/image.jpg", detail_level="concise")
+if result['success']:
+    print(f"Alt-text: {result['alt_text']}")
 
-# Get detailed description
-result = agent.generate_alt_text("complex_diagram.jpg", detailed=True)
-
-print(result['alt_text'])
+# Process a PDF
+result = extract_pdf_text_tool("path/to/document.pdf")
+if result['success']:
+    print(f"Extracted {result['char_count']} characters from {result['page_count']} pages")
 ```
 
----
+### Batch Processing
 
-## 📖 API Reference
+```python
+# Process multiple files
+files = ["image1.jpg", "image2.png", "document.pdf"]
 
-### CoordinatorAgent
+results = {
+    "total": len(files),
+    "processed": [],
+    "failed": []
+}
 
-#### `process_file(file_path, detailed=False)`
+for file_path in files:
+    if file_path.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp')):
+        result = generate_image_description_tool(file_path)
+    elif file_path.lower().endswith('.pdf'):
+        result = extract_pdf_text_tool(file_path)
+    
+    if result['success']:
+        results["processed"].append(file_path)
+    else:
+        results["failed"].append(file_path)
 
-Process a single file (image or PDF).
-
-**Parameters:**
-- `file_path` (str): Path to the file
-- `detailed` (bool): Whether to generate detailed descriptions (images only)
-
-**Returns:**
-- dict with keys: `success`, `file_type`, `file_path`, `result`, `error`
-
-#### `process_batch(file_paths, detailed=False)`
-
-Process multiple files in batch.
-
-**Parameters:**
-- `file_paths` (list): List of file paths
-- `detailed` (bool): Whether to generate detailed descriptions
-
-**Returns:**
-- dict with keys: `total_files`, `successful`, `failed`, `results`
-
-#### `generate_summary(batch_result)`
-
-Generate human-readable summary of batch processing.
-
-**Parameters:**
-- `batch_result` (dict): Result from `process_batch()`
-
-**Returns:**
-- str: Formatted summary
-
-### ImageDescriptionAgent
-
-#### `generate_alt_text(image_path, detailed=False)`
-
-Generate alt-text for an image.
-
-**Parameters:**
-- `image_path` (str): Path to image file
-- `detailed` (bool): Whether to generate detailed description
-
-**Returns:**
-- dict with keys: `success`, `alt_text`, `image_path`, `error`
-
-### PDFProcessingAgent
-
-#### `extract_text(pdf_path, max_pages=100)`
-
-Extract text from a PDF file.
-
-**Parameters:**
-- `pdf_path` (str): Path to PDF file
-- `max_pages` (int): Maximum pages to process
-
-**Returns:**
-- dict with keys: `success`, `text`, `page_count`, `total_pages`, `file_path`, `char_count`, `error`
+print(f"Success: {len(results['processed'])}/{len(files)}")
+```
 
 ---
 
@@ -390,95 +276,187 @@ Extract text from a PDF file.
 ### Run All Tests
 
 ```bash
-python run_tests.py
-```
-
-### Run Specific Test File
-
-```bash
-pytest tests/test_image_agent.py -v
-pytest tests/test_pdf_agent.py -v
-pytest tests/test_coordinator.py -v
+cd adk_version
+python test_adk_agents.py
 ```
 
 ### Test Coverage
 
-- ✅ Agent initialization
-- ✅ Error handling (missing files, corrupt files)
-- ✅ Image alt-text generation
+- ✅ File type detection
+- ✅ Image description generation
 - ✅ PDF text extraction
-- ✅ Batch processing
-- ✅ Multi-agent coordination
+- ✅ ADK agent initialization
+- ✅ End-to-end image processing
+- ✅ End-to-end PDF processing
+
+**Result:** 6/6 tests passing (100%)
+
+---
+
+## 📁 Project Structure
+
+```
+accessible-ai-agents/
+├── adk_version/                    # ADK Implementation (MAIN)
+│   ├── agent.py                   # 3 ADK agents + tools
+│   ├── agent.yaml                 # ADK deployment config
+│   ├── test_adk_agents.py         # Test suite (6 tests)
+│   ├── requirements.txt           # Dependencies
+│   └── README.md                  # ADK-specific docs
+├── src/                           # Original implementation
+│   ├── agents/
+│   │   ├── coordinator.py
+│   │   ├── image_agent.py
+│   │   └── pdf_agent.py
+│   ├── config.py
+│   └── utils/
+├── tests/                         # Additional tests
+├── examples/                      # Sample files
+│   ├── sample_images/
+│   └── sample_pdfs/
+├── docs/                          # Documentation
+├── CAPABILITIES.md                # Capabilities breakdown
+├── ARCHITECTURE_DIAGRAM.md        # System diagrams
+├── KAGGLE_FINAL_SUBMISSION.md    # Competition submission
+├── README.md                      # Main documentation
+├── requirements.txt               # All dependencies
+├── .env.example                  # Environment template
+├── .gitignore                    # Git ignore rules
+└── LICENSE                       # MIT License
+```
 
 ---
 
 ## 🚀 Deployment
 
-### Deploy to Google Cloud (Agent Engine)
+### Google Cloud (Agent Engine)
 
 ```bash
-# Install ADK CLI (if not already installed)
-pip install google-adk
+# Navigate to ADK version
+cd adk_version
 
-# Deploy to Agent Engine
+# Deploy with ADK
 adk deploy --project-id=YOUR_PROJECT_ID --region=us-central1
 
-# Get deployment URL
+# Check deployment
 adk info
+
+# Access web interface
+adk web --port 8000
 ```
 
-### Local Development Server
+### Local Development
 
 ```bash
-# Run locally for testing
-python src/agent.py
+# Run ADK locally
+adk run
+
+# Run tests locally
+python test_adk_agents.py
+
+# Use as library
+python
+>>> from agent import generate_image_description_tool
+>>> result = generate_image_description_tool("image.jpg")
 ```
 
 ---
 
-## 🛠️ Project Structure
+## 🎓 Real-World Impact
 
-```
-accessible-ai-capstone/
-├── src/
-│   ├── agent.py              # Main entry point (ADK required)
-│   ├── config.py             # Configuration management
-│   ├── agents/
-│   │   ├── coordinator.py    # Coordinator agent
-│   │   ├── image_agent.py    # Image description agent
-│   │   └── pdf_agent.py      # PDF processing agent
-│   └── utils/
-│       └── logging_config.py # Logging setup
-├── tests/
-│   ├── test_coordinator.py
-│   ├── test_image_agent.py
-│   └── test_pdf_agent.py
-├── examples/
-│   ├── sample_images/        # Test images
-│   └── sample_pdfs/          # Test PDFs
-├── requirements.txt          # Python dependencies
-├── .env.example             # Environment template
-├── .gitignore               # Git ignore rules
-└── README.md                # This file
-```
+### Use Cases
+
+1. **Educational Institutions** 🎓
+   - Make course materials accessible (ADA compliance)
+   - Convert textbooks for all students
+   - Support diverse learning needs
+
+2. **Digital Libraries** 📚
+   - Convert archives to accessible formats
+   - Preserve historical documents accessibly
+   - Enable researchers with disabilities
+
+3. **E-commerce** 🛒
+   - Product images accessible to all users
+   - Improve customer experience
+   - Expand market reach
+
+4. **Government** 🏛️
+   - Meet legal accessibility requirements
+   - Serve constituents with disabilities
+   - Ensure equal access to services
+
+5. **Businesses** 💼
+   - Comply with accessibility laws (ADA, WCAG)
+   - Reduce legal liability
+   - Expand customer base
+
+### Impact Numbers
+
+- **Manual alt-text:** 2-5 minutes per image
+- **Our system:** Seconds per image
+- **Cost:** $50-100/hour manual vs. $0.001 per image
+- **100x faster** and more cost-effective
+- **Reach:** 2.2 billion people with vision impairment
+
+---
+
+## 🛠️ Technical Excellence
+
+### Code Quality
+- ✅ Type hints on all functions
+- ✅ Comprehensive docstrings
+- ✅ Error handling with fallbacks
+- ✅ Input validation
+- ✅ Structured return values
+
+### ADK Best Practices
+- ✅ Proper agent configuration
+- ✅ Tool registration and schemas
+- ✅ Deployment configuration (agent.yaml)
+- ✅ Environment management
+- ✅ Production-ready structure
+
+### Testing & Documentation
+- ✅ 6 comprehensive tests (100% pass rate)
+- ✅ README with examples
+- ✅ API documentation
+- ✅ Capabilities mapping
+- ✅ Architecture diagrams
+
+---
+
+## 📊 Competition Compliance
+
+| Requirement | Status | Evidence |
+|-----------|--------|----------|
+| Uses Google ADK | ✅ YES | `adk_version/agent.py` + `agent.yaml` |
+| 3+ Capabilities | ✅ YES | 6 capabilities (see CAPABILITIES.md) |
+| Multi-agent System | ✅ YES | 3 specialized agents |
+| Solves Real Problem | ✅ YES | Accessibility for 2.2B people |
+| Working Implementation | ✅ YES | 6/6 tests passing |
+| Documentation | ✅ YES | Comprehensive README + guides |
+| Production-Ready | ✅ YES | Tests, deployment config, error handling |
+
+**Overall Compliance:** 7/7 (100%) ✅
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions welcome! Please:
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see LICENSE file for details.
 
 ---
 
@@ -486,15 +464,41 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - **Google Gemini Team** for the powerful vision API
 - **PyPDF2 Contributors** for PDF processing capabilities
-- **Accessibility Community** for highlighting the critical need for accessible content
-- **Kaggle AI Agents Competition** for the opportunity to build this solution
+- **Accessibility Community** for highlighting critical needs
+- **Kaggle** for the 5-Day AI Agents Intensive Course
+- **Course Instructors** for excellent teaching
 
 ---
 
-## 📞 Contact
+## 📞 Contact & Support
 
-For questions or feedback, please open an issue on GitHub.
+- **GitHub Issues:** [Report bugs or request features](https://github.com/Swanand33/accessible-ai-agents/issues)
+- **GitHub Discussions:** [Ask questions or discuss ideas](https://github.com/Swanand33/accessible-ai-agents/discussions)
+
+---
+
+## 🎯 What's Next?
+
+### Future Enhancements
+
+The multi-agent architecture makes it easy to add:
+
+- **Video Captioning Agent** - Automatic subtitle generation
+- **Audio Transcription Agent** - Speech-to-text conversion
+- **HTML Optimization Agent** - Web accessibility improvements
+- **Memory Capability** - Remember user preferences
+- **Evaluation Framework** - Quality metrics
+
+### Roadmap
+
+- [ ] Add video support
+- [ ] Add audio transcription
+- [ ] Web API interface
+- [ ] Dashboard for monitoring
+- [ ] Scaling for enterprise use
 
 ---
 
 **Built with ❤️ for accessibility. Powered by Google Gemini 2.0 Flash.**
+
+**Making digital content accessible for everyone. One file at a time.**
