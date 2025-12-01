@@ -1,0 +1,20 @@
+# AccessibleAI - ADK Version Requirements
+
+# Google Agent Development Kit
+google-adk>=0.1.0
+
+# Google Generative AI (Gemini)
+google-generativeai>=0.8.0
+
+# Image processing
+Pillow>=10.0.0
+
+# PDF processing
+PyPDF2>=3.0.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Testing (optional but recommended)
+pytest>=7.4.0
+pytest-asyncio>=0.21.0

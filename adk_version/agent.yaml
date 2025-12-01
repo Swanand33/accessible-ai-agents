@@ -1,0 +1,189 @@
+# AccessibleAI - ADK Agent Configuration
+# Multi-Agent System for Digital Content Accessibility
+# Kaggle 5-Day AI Agents Intensive Course - Capstone Project
+
+name: accessible-ai-multi-agent-system
+description: >
+  Multi-agent system that makes digital content accessible for people with vision impairment.
+  Processes images to generate alt-text and extracts text from PDFs for screen readers.
+  Built with Google Agent Development Kit (ADK).
+
+# Root Coordinator Agent
+root_agent:
+  name: accessibility_coordinator
+  model: gemini-pro-vision
+  description: Coordinates image and PDF processing for digital content accessibility
+
+  system_instruction: >
+    You are the AccessibleAI coordinator agent. Your mission is to make
+    digital content accessible for people with vision impairment.
+
+    You have access to specialized tools for different file types:
+    1. generate_image_description_tool - for processing images (JPG, PNG, etc.)
+    2. extract_pdf_text_tool - for extracting text from PDFs
+    3. detect_file_type_tool - to identify file types
+
+    When a user provides a file:
+    1. First use detect_file_type_tool to identify the file type
+    2. Based on the type, call the appropriate tool:
+       - For images: use generate_image_description_tool
+       - For PDFs: use extract_pdf_text_tool
+    3. Return the processed results clearly
+
+    For batch operations:
+    1. Process each file individually
+    2. Aggregate results
+    3. Provide a summary
+
+    You are serving a critical accessibility mission - every file you process helps
+    someone with vision impairment access content. Be thorough, accurate, and helpful.
+
+  tools:
+    - detect_file_type_tool
+    - generate_image_description_tool
+    - extract_pdf_text_tool
+
+# Specialized Sub-Agents
+agents:
+  - name: image_description_agent
+    model: gemini-pro-vision
+    description: Generates accessible alt-text for images using Gemini Vision AI
+
+    system_instruction: >
+      You are an image description specialist agent. Your role is to:
+      1. Analyze images using vision AI
+      2. Generate descriptive, accessible alt-text suitable for screen readers
+      3. Focus on content that helps vision-impaired users understand the image
+      4. Provide both concise and detailed description options
+
+      Always be descriptive, accurate, and accessibility-focused.
+
+    tools:
+      - generate_image_description_tool
+
+  - name: pdf_processing_agent
+    model: gemini-pro-vision
+    description: Extracts text from PDF documents for screen reader accessibility
+
+    system_instruction: >
+      You are a PDF processing specialist agent. Your role is to:
+      1. Extract text from PDF documents
+      2. Preserve document structure with page separators
+      3. Handle multi-page documents efficiently
+      4. Provide statistics about the extracted content
+
+      Always ensure extracted text is clean, structured, and accessible.
+
+    tools:
+      - extract_pdf_text_tool
+
+# Tool Definitions
+tools:
+  - name: generate_image_description_tool
+    description: >
+      Generate accessible alt-text for images using Gemini Vision.
+      Enables vision-impaired users to understand image content by generating
+      descriptive alt-text suitable for screen readers.
+
+    parameters:
+      - name: image_path
+        type: string
+        description: Path to the image file
+        required: true
+
+      - name: detail_level
+        type: string
+        description: Level of detail - "concise" (2-3 sentences) or "detailed" (comprehensive)
+        required: false
+        default: "concise"
+
+    returns:
+      type: dict
+      description: Dictionary with success status, alt-text, and metadata
+
+  - name: extract_pdf_text_tool
+    description: >
+      Extract text from PDF documents for screen reader accessibility.
+      Makes PDF content accessible to assistive technologies by extracting
+      text with page structure preservation.
+
+    parameters:
+      - name: pdf_path
+        type: string
+        description: Path to the PDF file
+        required: true
+
+      - name: max_pages
+        type: integer
+        description: Maximum number of pages to process (safety limit)
+        required: false
+        default: 100
+
+    returns:
+      type: dict
+      description: Dictionary with success status, extracted text, and statistics
+
+  - name: detect_file_type_tool
+    description: >
+      Detect file type based on extension.
+      Identifies whether a file is an image, PDF, or other type.
+
+    parameters:
+      - name: file_path
+        type: string
+        description: Path to the file
+        required: true
+
+    returns:
+      type: dict
+      description: Dictionary with file type and metadata
+
+# Deployment Configuration
+deployment:
+  runtime: python3.12
+  entry_point: agent.py
+
+  environment:
+    GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+
+  requirements:
+    - google-adk>=0.1.0
+    - google-generativeai>=0.8.0
+    - Pillow>=10.0.0
+    - PyPDF2>=3.0.0
+    - python-dotenv>=1.0.0
+
+# Capabilities Demonstrated (for Kaggle competition)
+capabilities:
+  - name: Tools & Integration
+    description: Integrates Gemini Vision API and PyPDF2 library as tools
+
+  - name: Multi-Agent Orchestration
+    description: Uses ADK coordinator pattern with 3 specialized agents
+
+  - name: Model Integration
+    description: Properly integrates Gemini Pro Vision model via ADK
+
+  - name: Error Handling
+    description: Comprehensive error handling in all tools
+
+  - name: Production Readiness
+    description: ADK framework, proper structure, comprehensive documentation
+
+# Competition Information
+metadata:
+  competition: Kaggle 5-Day AI Agents Intensive Capstone
+  track: Agents for Good - Accessibility
+  framework: Google Agent Development Kit (ADK)
+  impact: Making digital content accessible for 2.2 billion people with vision impairment
+
+  github: https://github.com/Swanand33/accessible-ai-agents
+
+  keywords:
+    - accessibility
+    - vision-impairment
+    - alt-text-generation
+    - pdf-extraction
+    - screen-readers
+    - multi-agent
+    - google-adk
